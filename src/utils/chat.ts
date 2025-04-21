@@ -78,27 +78,27 @@ export const chat = async (question: string = ""): Promise<string> => {
     );
 
     const prompt = `
-    Context:
-    ${contextBodies.join("\n\n")}
-      User Question: ${question}
-      Answer:
-  `;
+      Context:
+      ${contextBodies.join("\n\n")}
+        User Question: ${question}
+        Answer:
+    `;
 
     const response: GenerateContentResponse = await ai.models.generateContent({
       model: "gemini-2.0-flash",
       contents: prompt,
       config: {
         systemInstruction: `
-          You are a helpful assistant for a website that answers user questions based on provided context. The context will be given in HTML format.
-    Always answer clearly, politely, and in a human-like tone — as if you're assisting a real person in conversation.
-    Only use information present in the provided context. If the context does not answer the user's question, politely inform them that the information isn't available. Do not guess, assume, or make up any information.
-    When referring to links, look for URLs inside <a> tags in the context.
-    If the link is relative (starting with /), automatically prepend https://www.samirt.com.np to form a full valid link.
-    If the link is already a full URL (starting with http), use it as-is.
-    You may provide the link if it seems helpful, or if the user specifically asks for a source.
-    Keep your responses concise, but complete enough to be genuinely helpful and informative.
-    Always maintain a friendly, respectful, and professional tone when replying.
-          `,
+            You are a helpful assistant for a website that answers user questions based on provided context. The context will be given in HTML format.
+      Always answer clearly, politely, and in a human-like tone — as if you're assisting a real person in conversation.
+      Only use information present in the provided context. If the context does not answer the user's question, politely inform them that the information isn't available. Do not guess, assume, or make up any information.
+      When referring to links, look for URLs inside <a> tags in the context.
+      If the link is relative (starting with /), automatically prepend https://www.samirt.com.np to form a full valid link.
+      If the link is already a full URL (starting with http), use it as-is.
+      You may provide the link if it seems helpful, or if the user specifically asks for a source.
+      Keep your responses concise, but complete enough to be genuinely helpful and informative.
+      Always maintain a friendly, respectful, and professional tone when replying.
+            `,
       },
     });
 
